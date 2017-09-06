@@ -1,4 +1,5 @@
 #include "shader.h"
+#include <fstream>
 
 Shader::Shader()
 {
@@ -32,6 +33,28 @@ bool Shader::Initialize()
   return true;
 }
 
+std::string readFile(std::string filePath)
+{
+	std::string file;
+	std::ifstream fileStream(filePath, std::ios::in);
+
+	if(!fileStream.is_open())
+	{
+		std::cerr << "File cannot be read." << std::endl;
+		return "";
+	}
+
+	std::string line = "";
+	while(!fileStream.eof())
+	{
+		std::getline(fileStream, line);
+		file.append(line + "\n");
+	}
+
+	fileStream.close();
+	return file;
+}
+
 // Use this method to add shaders to the program. When finished - call finalize()
 bool Shader::AddShader(GLenum ShaderType)
 {
@@ -39,7 +62,8 @@ bool Shader::AddShader(GLenum ShaderType)
 
   if(ShaderType == GL_VERTEX_SHADER)
   {
-    s = "#version 330\n \
+    s = readFile("/nfs/home/jsannicolas/cs480SanNicolas/PA1/shaders/vertex_shader");
+		 /*"#version 330\n \
           \
           layout (location = 0) in vec3 v_position; \
           layout (location = 1) in vec3 v_color; \
@@ -56,11 +80,12 @@ bool Shader::AddShader(GLenum ShaderType)
             gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * v; \
             color = v_color; \
           } \
-          ";
+          "*/;
   }
   else if(ShaderType == GL_FRAGMENT_SHADER)
   {
-    s = "#version 330\n \
+    s = readFile("/nfs/home/jsannicolas/cs480SanNicolas/PA1/shaders/fragment_shader");
+		/*"#version 330\n \
           \
           smooth in vec3 color; \
           \
@@ -70,7 +95,7 @@ bool Shader::AddShader(GLenum ShaderType)
           { \
              frag_color = vec4(color.rgb, 1.0); \
           } \
-          ";
+          "*/;
   }
 
   GLuint ShaderObj = glCreateShader(ShaderType);
