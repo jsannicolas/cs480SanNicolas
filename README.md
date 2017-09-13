@@ -17,10 +17,4 @@ Mouse buttons
 Left Mouse: reverse
 Right Mouse: pause
 Middle Mouse: resume
-=======
-buttons and their uses
-R : reverse
-T : pause
-P : resume
-Mouse Left CLick: reverse
->>>>>>> 030fd43dadeda25483d2560624b330e68818abfb
+
