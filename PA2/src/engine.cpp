@@ -7,6 +7,8 @@ Engine::Engine(string name, int width, int height)
   m_WINDOW_WIDTH = width;
   m_WINDOW_HEIGHT = height;
   m_FULLSCREEN = false;
+
+	pause = false;
 }
 
 Engine::Engine(string name)
@@ -63,11 +65,10 @@ void Engine::Run()
     while(SDL_PollEvent(&m_event) != 0)
     {
       Keyboard();
-	  Mouse();
     }
 
     // Update and render the graphics
-    m_graphics->Update(m_DT, false, ' ');
+    m_graphics->Update(m_DT, reverse, pause);
     m_graphics->Render();
 
     // Swap to the Window
@@ -88,28 +89,42 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
-	else if (m_event.key.keysym.sym == SDLK_r) //press R key
+	else if (m_event.key.keysym.sym == SDLK_q)
 	{
-		m_graphics->Update(m_DT, true, 'r');
+		reverse = true;
 	}
-	else if (m_event.key.keysym.sym == SDLK_t) //press T key
+	else if (m_event.key.keysym.sym == SDLK_w)
 	{
-		m_graphics->Update(m_DT, true, 't');
+		pause = true;
 	}
-	else if (m_event.key.keysym.sym == SDLK_p) //press P key
+	else if (m_event.key.keysym.sym == SDLK_e) 
 	{
-		m_graphics->Update(m_DT, true, 'p');	
+		pause = false;	
+	}
+	else if (m_event.key.keysym.sym == SDLK_r)
+	{
+		reverse = false;
 	}
   }
+
+	else if(m_event.type == SDL_MOUSEBUTTONDOWN)
+	{
+		if(m_event.button.button == SDL_BUTTON_LEFT)
+		{
+			reverse = true;
+		}
+		else if(m_event.button.button == SDL_BUTTON_RIGHT)
+		{
+			pause = true;
+		}
+		else if(m_event.button.button == SDL_BUTTON_MIDDLE)
+		{
+			pause = false;
+		}
+	}
+
 }
 
-void Engine::Mouse()
-{
-	if(m_event.type == SDL_MOUSEBUTTONDOWN)
-	{
-		m_graphics->Update(m_DT, true, 'r'); //activates reverse
-	}
-}
 
 unsigned int Engine::getDT()
 {

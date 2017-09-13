@@ -61,6 +61,9 @@ Object::Object()
   }
 
   angle = 0.0f;
+	orbit = angle;
+	rotate = angle;
+	
 
   glGenBuffers(1, &VB);
   glBindBuffer(GL_ARRAY_BUFFER, VB);
@@ -77,34 +80,33 @@ Object::~Object()
   Indices.clear();
 }
 
-void Object::Update(unsigned int dt, bool buttonPress, unsigned char button)
+void Object::Update(unsigned int dt, bool reverse, bool pause)
 {
-  angle += dt * M_PI/1000;
-  
-	if( buttonPress == true && button == 'r' ) //reverse
+	//takes bool and sees if pauses
+	if( pause == true )
 	{
-		model = glm::rotate(glm::mat4(1.0f), -(angle), glm::vec3(0.0, -1.0, 0.0));
-  		model = glm::translate(model, glm::vec3(-5.0, 0.0, 0.0));
-  		model = glm::rotate(model, -(angle), glm::vec3(0.0, -1.0, 0.0));
+		orbit = orbit;
+		rotate = rotate;
 	}
-	else if( buttonPress == true && button == 't' ) //stop moving and rotating
+
+	else
 	{
-		model = glm::rotate(glm::mat4(1.0f), (angle * 0), glm::vec3(0.0, 1.0, 0.0));
-		model = glm::translate(model, glm::vec3(5.0, 0.0, 0.0));
-  		model = glm::rotate(model, (angle), glm::vec3(0.0, 1.0, 0.0));
+		//takes bools and reverses cube
+		if( reverse == true )
+		{
+			orbit -= dt * M_PI/1000;
+			rotate -= dt * M_PI/400;
+		}
+		else
+		{
+			orbit += dt * M_PI/1000;
+			rotate += dt * M_PI/400;
+		}
 	}
-	else if( buttonPress == true && button == 'p' ) //resume
-	{
-		model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
-  		model = glm::translate(model, glm::vec3(5.0, 0.0, 0.0));
-  		model = glm::rotate(model, (angle), glm::vec3(0.0, 1.0, 0.0));
-	}
-	else //moves normally
-	{
-		model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
-  		model = glm::translate(model, glm::vec3(5.0, 0.0, 0.0));
-  		model = glm::rotate(model, (angle), glm::vec3(0.0, 1.0, 0.0));
-	}	
+	model = glm::rotate(glm::mat4(1.0f), (rotate), glm::vec3(0.0, 1.0, 0.0));
+	model = glm::translate(model, glm::vec3(5.0, 0.0, 0.0));
+	model = glm::rotate(model, (rotate), glm::vec3(0.0, 1.0, 0.0));
+
 }
 
 glm::mat4 Object::GetModel()

@@ -9,7 +9,7 @@ class Object
   public:
     Object();
     ~Object();
-    void Update(unsigned int dt, bool buttonPress, unsigned char button);
+    void Update(unsigned int dt, bool reverse, bool pause);
     void Render();
 
     glm::mat4 GetModel();
@@ -22,6 +22,8 @@ class Object
     GLuint IB;
 
     float angle;
+	float orbit;
+	float rotate;
 };
 
 #endif /* OBJECT_H */

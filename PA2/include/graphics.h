@@ -15,7 +15,7 @@ class Graphics
     Graphics();
     ~Graphics();
     bool Initialize(int width, int height);
-    void Update(unsigned int dt, bool buttonPress, unsigned char button);
+    void Update(unsigned int dt, bool reverse, bool pause);
     void Render();
 
   private:
