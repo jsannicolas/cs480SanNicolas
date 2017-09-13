@@ -62,11 +62,11 @@ bool Shader::AddShader(GLenum ShaderType)
 
   if(ShaderType == GL_VERTEX_SHADER)
   {
-    s = readFile("/nfs/home/jsannicolas/cs480SanNicolas/PA1/shaders/vertex_shader");
+    s = readFile("../shaders/vertex_shader");
   }
   else if(ShaderType == GL_FRAGMENT_SHADER)
   {
-    s = readFile("/nfs/home/jsannicolas/cs480SanNicolas/PA1/shaders/fragment_shader");
+    s = readFile("../shaders/fragment_shader");
   }
 
   GLuint ShaderObj = glCreateShader(ShaderType);
