@@ -6,7 +6,6 @@ vertex shader: vertex_shader
 fragment shader: fragment_shader
 
 #PA2
-<<<<<<< HEAD
 buttons and what they do to the cube
 Q: reverses cubes (clockwise)
 W: pauses the cube's motion
