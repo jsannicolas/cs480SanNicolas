@@ -89,19 +89,19 @@ void Engine::Keyboard()
     {
       m_running = false;
     }
-	else if (m_event.key.keysym.sym == SDLK_q)
+	else if (m_event.key.keysym.sym == SDLK_q || m_event.key.keysym.sym == SDLK_LEFT)
 	{
 		reverse = true;
 	}
-	else if (m_event.key.keysym.sym == SDLK_w)
+	else if (m_event.key.keysym.sym == SDLK_w || m_event.key.keysym.sym == SDLK_DOWN)
 	{
 		pause = true;
 	}
-	else if (m_event.key.keysym.sym == SDLK_e) 
+	else if (m_event.key.keysym.sym == SDLK_e || m_event.key.keysym.sym == SDLK_UP) 
 	{
 		pause = false;	
 	}
-	else if (m_event.key.keysym.sym == SDLK_r)
+	else if (m_event.key.keysym.sym == SDLK_r || m_event.key.keysym.sym == SDLK_RIGHT)
 	{
 		reverse = false;
 	}

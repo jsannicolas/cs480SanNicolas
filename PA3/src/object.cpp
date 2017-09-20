@@ -61,6 +61,7 @@ Object::Object()
   }
 
   angle = 0.0f;
+	moonAngle = 0.0f;
 	orbit = angle;
 	rotate = angle;
 	
@@ -103,15 +104,26 @@ void Object::Update(unsigned int dt, bool reverse, bool pause)
 			rotate += dt * M_PI/400;
 		}
 	}
-	model = glm::rotate(glm::mat4(1.0f), (rotate), glm::vec3(0.0, 1.0, 0.0));
-	model = glm::translate(model, glm::vec3(5.0, 0.0, 0.0));
-	model = glm::rotate(model, (rotate), glm::vec3(0.0, 1.0, 0.0));
+
+	moonAngle += dt * M_PI/1000;
+
+	planet = glm::rotate(glm::mat4(1.0f), (rotate), glm::vec3(0.0, 1.0, 0.0));
+	moon = glm::rotate(glm::mat4(1.0f), (moonAngle), glm::vec3(0.0, 1.0, 0.0));
+	planet = glm::translate(planet, glm::vec3(5.0, 0.0, 0.0));
+	moon = glm::translate(moon, glm::vec3(2.0, 0.0, 0.0));
+
+	//planet = glm::rotate(planet, (rotate), glm::vec3(0.0, 1.0, 0.0));
 
 }
 
-glm::mat4 Object::GetModel()
+glm::mat4 Object::GetPlanet()
 {
-  return model;
+  return planet;
+}
+
+glm::mat4 Object::GetMoon()
+{
+  return moon;
 }
 
 void Object::Render()

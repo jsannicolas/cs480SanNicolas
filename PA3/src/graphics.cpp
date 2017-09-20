@@ -45,7 +45,8 @@ bool Graphics::Initialize(int width, int height)
   }
 
   // Create the object
-  m_cube = new Object();
+  m_planet = new Object();
+	m_moon = new Object();
 
   // Set up the shaders
   m_shader = new Shader();
@@ -110,7 +111,7 @@ bool Graphics::Initialize(int width, int height)
 void Graphics::Update(unsigned int dt, bool reverse, bool pause)
 {
   // Update the object
-  m_cube->Update(dt, reverse, pause);
+  m_planet->Update(dt, reverse, pause);
 }
 
 void Graphics::Render()
@@ -127,8 +128,11 @@ void Graphics::Render()
   glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView())); 
 
   // Render the object
-  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-  m_cube->Render();
+  glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_planet->GetPlanet()));
+  m_planet->Render();
+
+	glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_moon->GetMoon()));
+	m_moon->Render();
 
   // Get any errors from OpenGL
   auto error = glGetError();
