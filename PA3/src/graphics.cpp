@@ -112,6 +112,7 @@ void Graphics::Update(unsigned int dt, bool reverse, bool pause)
 {
   // Update the object
   m_planet->Update(dt, reverse, pause);
+	m_moon->Update(dt, reverse, pause);
 }
 
 void Graphics::Render()

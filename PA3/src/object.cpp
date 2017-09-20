@@ -88,6 +88,14 @@ void Object::Update(unsigned int dt, bool reverse, bool pause)
 	{
 		orbit = orbit;
 		rotate = rotate;
+		if( reverse == true )
+		{
+			moonAngle -= dt * M_PI/2000;
+		}
+		else
+		{
+			moonAngle += dt * M_PI/2000;
+		}
 	}
 
 	else
@@ -96,23 +104,24 @@ void Object::Update(unsigned int dt, bool reverse, bool pause)
 		if( reverse == true )
 		{
 			orbit -= dt * M_PI/1000;
-			rotate -= dt * M_PI/400;
+			rotate -= dt * M_PI/1000;
+			moonAngle -= dt * M_PI/2000;
 		}
 		else
 		{
 			orbit += dt * M_PI/1000;
-			rotate += dt * M_PI/400;
+			rotate += dt * M_PI/1000;
+			moonAngle += dt * M_PI/2000;
 		}
 	}
 
-	moonAngle += dt * M_PI/1000;
-
 	planet = glm::rotate(glm::mat4(1.0f), (rotate), glm::vec3(0.0, 1.0, 0.0));
-	moon = glm::rotate(glm::mat4(1.0f), (moonAngle), glm::vec3(0.0, 1.0, 0.0));
 	planet = glm::translate(planet, glm::vec3(5.0, 0.0, 0.0));
-	moon = glm::translate(moon, glm::vec3(2.0, 0.0, 0.0));
+	planet = glm::rotate(planet, (rotate), glm::vec3(0.0, 1.0, 0.0));
 
-	//planet = glm::rotate(planet, (rotate), glm::vec3(0.0, 1.0, 0.0));
+	moon = glm::rotate((glm::mat4(1.0f) * planet), (moonAngle), glm::vec3(0.0, 2.0, 0.0));
+	moon = glm::translate(moon, glm::vec3(4.0, 0.0, 0.0));
+	moon = glm::rotate(moon, (moonAngle), glm::vec3(0.0, 2.0, 0.0));
 
 }
 
