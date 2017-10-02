@@ -13,7 +13,7 @@ class Engine
     Engine(string name, int width, int height);
     Engine(string name);
     ~Engine();
-    bool Initialize();
+    bool Initialize(string vertShade, string fragShade, string obj);
     void Run();
     void Keyboard();
     unsigned int getDT();

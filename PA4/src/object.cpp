@@ -1,72 +1,19 @@
 #include "object.h"
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include <cmath>
 
 using namespace std;
 
 Object::Object()
+{
+
+}
+
+Object::Object(string file)
 {  
-  /*
-    # Blender File for a Cube
-    o Cube
-    v 1.000000 -1.000000 -1.000000
-    v 1.000000 -1.000000 1.000000
-    v -1.000000 -1.000000 1.000000
-    v -1.000000 -1.000000 -1.000000
-    v 1.000000 1.000000 -0.999999
-    v 0.999999 1.000000 1.000001
-    v -1.000000 1.000000 1.000000
-    v -1.000000 1.000000 -1.000000
-    s off
-    f 2 3 4
-    f 8 7 6
-    f 1 5 6
-    f 2 6 7
-    f 7 8 4
-    f 1 4 8
-    f 1 2 4
-    f 5 8 6
-    f 2 1 6
-    f 3 2 7
-    f 3 7 4
-    f 5 1 8*/
-  
-
-  Vertices = {
-    {{1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 0.0f}},
-    {{1.0f, -1.0f, 1.0f}, {1.0f, 0.0f, 0.0f}},
-    {{-1.0f, -1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}},
-    {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f, 1.0f}},
-    {{1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 0.0f}},
-    {{1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 1.0f}},
-    {{-1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 1.0f}},
-    {{-1.0f, 1.0f, -1.0f}, {1.0f, 1.0f, 1.0f}}
-  };
-
-  Indices = {
-    2, 3, 4,
-    8, 7, 6,
-    1, 5, 6,
-    2, 6, 7,
-    7, 8, 4,
-    1, 4, 8,
-    1, 2, 4,
-    5, 8, 6,
-    2, 1, 6,
-    3, 2, 7,
-    3, 7, 4,
-    5, 1, 8
-  };
-
-  // The index works at a 0th index
-  for(unsigned int i = 0; i < Indices.size(); i++)
-  {
-    Indices[i] = Indices[i] - 1;
-  }
-
-
-	loadObj();
+	loadObj(file);
   angle = 0.0f;
 
   glGenBuffers(1, &VB);
@@ -92,7 +39,7 @@ void Object::Update(unsigned int dt)
   //model = glm::rotate(model, (angle), glm::vec3(0.0, 1.0, 0.0));
 }
 
-bool Object::loadObj()
+bool Object::loadObj(string objFile)
 {
 	Vertices.clear();
 	Indices.clear();
@@ -101,7 +48,7 @@ bool Object::loadObj()
 	
 	string line;
 	ifstream file;
-	file.open("../objects/board.obj");
+	file.open( objFile );
 
 	if(!file.is_open())
 	{

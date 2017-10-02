@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 {
   // Start an engine and run it then cleanup after
   Engine *engine = new Engine("Tutorial Window Name", 800, 600);
-  if(!engine->Initialize())
+  if(!engine->Initialize( argv[1], argv[2], argv[3] ))
   {
     printf("The engine failed to start.\n");
     delete engine;

@@ -5,6 +5,8 @@
 
 #include "graphics_headers.h"
 
+using namespace std;
+
 class Shader
 {
   public:
@@ -12,7 +14,7 @@ class Shader
     ~Shader();
     bool Initialize();
     void Enable();
-    bool AddShader(GLenum ShaderType);
+    bool AddShader(GLenum ShaderType, string shadeFile);
     bool Finalize();
     GLint GetUniformLocation(const char* pUniformName);
 	

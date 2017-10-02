@@ -2,16 +2,20 @@
 #define OBJECT_H
 
 #include <vector>
+#include <cstring>
 #include "graphics_headers.h"
+
+using namespace std;
 
 class Object
 {
   public:
     Object();
+	Object(string file);
     ~Object();
     void Update(unsigned int dt);
     void Render();
-	bool loadObj();
+	bool loadObj(string objFile);
 
     glm::mat4 GetModel();
 

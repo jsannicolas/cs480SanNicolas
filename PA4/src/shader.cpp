@@ -1,6 +1,8 @@
 #include "shader.h"
 #include <fstream>
 
+using namespace std;
+
 Shader::Shader()
 {
   m_shaderProg = 0;
@@ -56,17 +58,17 @@ std::string readFile(std::string filePath)
 }
 
 // Use this method to add shaders to the program. When finished - call finalize()
-bool Shader::AddShader(GLenum ShaderType)
+bool Shader::AddShader(GLenum ShaderType, string file)
 {
   std::string s;
 
   if(ShaderType == GL_VERTEX_SHADER)
   {
-    s = readFile("../shaders/vertex_shader");
+    s = readFile(file);
   }
   else if(ShaderType == GL_FRAGMENT_SHADER)
   {
-    s = readFile("../shaders/fragment_shader");
+    s = readFile(file);
   }
 
   GLuint ShaderObj = glCreateShader(ShaderType);
