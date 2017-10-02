@@ -6,32 +6,39 @@ vertex shader: vertex_shader
 fragment shader: fragment_shader
 
 #PA2
-buttons and what they do to the cube
-Q: reverses cubes (clockwise)
-W: pauses the cube's motion
-E: resumes the cube's motion
-R: resets cube (back to counterclockwise)
-
-Mouse buttons
-Left Mouse: reverse
-Right Mouse: pause
-Middle Mouse: resume
+\n
+buttons and what they do to the cube \n
+Q: reverses cubes (clockwise) \n
+W: pauses the cube's motion \n
+E: resumes the cube's motion \n
+R: resets cube (back to counterclockwise) \n
+\n
+Mouse buttons \n
+Left Mouse: reverse \n
+Right Mouse: pause \n
+Middle Mouse: resume \n
 
 #PA3
-Keyboard Keys
-Q: reverses cubes (clockwise)
-W: pauses the cube's motion
-E: resumes the cube's motion
-R: resets cube (back to counterclockwise)
+\n
+Keyboard Keys \n
+Q: reverses cubes (clockwise) \n
+W: pauses the cube's motion \n
+E: resumes the cube's motion \n
+R: resets cube (back to counterclockwise) \n
+\n
+Arrown Keys \n
+Left: reverse \n
+Down: pause \n
+Up: resume \n
+Right: reset \n
+\n
+Mouse buttons \n
+Left Mouse: reverse \n
+Right Mouse: pause \n
+Middle Mouse: resume \n
 
-Arrown Keys
-Left: reverse
-Down: pause
-Up: resume
-Right: reset
-
-Mouse buttons
-Left Mouse: reverse
-Right Mouse: pause
-Middle Mouse: resume
+#PA4
+\n
+command line arguments: program_name vertex_shader fragment_shader obj_file \n
+example: ./Tutorial ../shaders/vertex_shader ../fragment_shader ../objects/board.obj \n
 
